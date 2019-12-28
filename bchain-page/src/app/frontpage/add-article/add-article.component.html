@@ -1,0 +1,48 @@
+<div id="articlepopup" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Neuen Artikel erstellen</p>
+      <button class="delete" aria-label="close" (click)="togglePopup()"></button>
+    </header>
+    <form #articleForm="ngForm">
+      <section class="modal-card-body">
+        <div class="field">
+          <label class="label">Title hinzufügen</label>
+          <div class="control">
+            <input class="input" [(ngModel)]="model.title" name="title" type="text" placeholder="Beitragstitel">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Untertitel</label>
+          <div class="control">
+            <input class="input" type="text" [(ngModel)]="model.subtitle" name="subtitle" placeholder="Untertitel hinzufügen">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Beitragstext</label>
+          <div class="control">
+            <textarea class="textarea" [(ngModel)]="model.content" name="content" placeholder="Text hinzufügen"></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Beitragsbild</label>
+          <div class="control">
+            <input style="display: none"
+                   type="file" (change)="onFileChanged($event)"
+                   #fileInput>
+            <button (click)="fileInput.click()">Select File</button>
+          </div>
+        </div>
+      </section>
+      <footer class="modal-card-foot">
+        <button type="submit" *ngIf="!model.id" (click)="addArticle()" class="button is-success">Artikel erstellen</button>
+        <button type="submit" *ngIf="model.id" (click)="updateArticle()" class="button is-success">Artikel updaten</button>
+        <button class="button" (click)="togglePopup()">Abbrechen</button>
+      </footer>
+    </form>
+  </div>
+</div>

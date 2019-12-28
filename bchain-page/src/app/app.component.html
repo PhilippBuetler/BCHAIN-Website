@@ -1,0 +1,59 @@
+<!-- START NAV -->
+<nav class="navbar">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="../">
+        <img src="assets/img/logo.jpg" alt="Logo">
+      </a>
+      <span class="navbar-burger burger" (click)="toggleMenu()" [ngClass]="menu_active ? 'is-active' : ''" data-target="navbarMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </div>
+    <div id="navbarMenu" class="navbar-menu" [ngClass]="menu_active ? 'is-active' : ''">
+      <div class="navbar-end">
+        <a class="navbar-item is-active" routerLink="/frontpage">
+          Home
+        </a>
+        <a class="navbar-item" *ngIf="isUser || isAdmin" routerLink="/userpage">
+          Spendenübersicht
+        </a>
+        <a class="navbar-item" *ngIf="isAdmin" (click)="addArticle()">
+          Neuen Eintrag erstellen
+        </a>
+        <a class="navbar-item" *ngIf="!currentUser" (click)="addUser()">
+          Registrieren
+        </a>
+        <a class="navbar-item" *ngIf="!currentUser" (click)="showLogin()">
+          Login
+        </a>
+        <a class="navbar-item" *ngIf="currentUser" (click)="logout()">
+          Logout
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Header-->
+<section class="hero is-info is-medium is-bold">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title" style="color:black">Herzlich Willkommen bei BFair! <br><br />BHuman, BNice, BWise, BExcited, BThere, BUnited, BFair</h1>
+    </div>
+  </div>
+</section>
+<!-- Header End-->
+<!-- main app container -->
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+<app-login></app-login>
+<app-add-user></app-add-user>

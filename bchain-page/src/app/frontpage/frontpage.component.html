@@ -1,0 +1,50 @@
+<div class="container">
+  <section class="articles">
+    <div class="column is-8 is-offset-2">
+      <div class="card article" *ngFor="let a of articles">
+        <section class="hero is-info is-bold is-small promo-block">
+          <div class="image-container" *ngIf="a.imagepath">
+            <img class="title-image" src="{{a.imagepath}}" />
+            <div *ngIf="a.imagepath">
+              <!--<h1 class="title image-overlapping">
+                <i class="fa fa-bell-o"></i> Turnerreise 201923
+              </h1>-->
+              <span class="tag is-black is-medium is-rounded top-left">
+                <i class="fa fa-bell-o"></i> {{a.title}}
+              </span>
+            </div>
+          </div>
+          <div style="margin: 20px 30px -40px 0px; z-index: 1">
+            <button *ngIf="isAdmin" class="delete" style="float:right; margin-left:10px;" (click)="deleteArticle(a.id)" aria-label="close"></button>
+            <a *ngIf="isAdmin" style="float:right" (click)="updateArticle(a)">
+              edit
+            </a>
+          </div>
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content has-text-centered">
+                <p class="title article-title" style="color:black">{{a.title}}</p>
+                <p class="subtitle is-6 article-subtitle" style="color:black">
+                  <a href="#" style="color: #3273dc;">@MenschenFürMenschen</a> on November, 2019
+                </p>
+              </div>
+            </div>
+            <div class="content article-body">
+              <h3 class="has-text-centered">{{a.subtitle}}</h3>
+              <p>
+                {{a.content}}
+              </p>
+              <div class="has-text-centered">
+                <button class="button is-success is-center is-large" (click)="spenden(a)">
+                  <span>Ja, ich möchte Spenden!</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+  <app-add-article (notifyParent)="eventFromChild($event)"></app-add-article>
+  <app-spenden-popup (notifyParent)="eventFromChild2($event)"></app-spenden-popup>
+</div>
